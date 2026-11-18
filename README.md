@@ -36,7 +36,6 @@ Requirements: PHP 8.3 or newer, Composer, Node.js with npm, and the PHP SQLite e
 ```bash
 composer install
 cp .env.example .env
-touch database/database.sqlite
 php artisan key:generate
 php artisan migrate
 npm install
