@@ -12,6 +12,9 @@
             document.documentElement.dataset.theme = 'dark';
         }
     </script>
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    @endpush
     @stack('styles')
 </head>
 <body>

@@ -48,9 +48,9 @@ Open the local URL printed by `php artisan serve` (usually `http://127.0.0.1:800
 
 ## Shared layout and assets
 
-- `resources/views/layouts/app.blade.php` owns the wordmark, floating navigation, theme control, decorative coffee doodles, footer, and Blade content/style/script stacks.
+- `resources/views/layouts/app.blade.php` owns the wordmark, floating navigation, theme control, decorative coffee doodles, footer, and Blade content/style/script stacks. It loads the shared theme stylesheet for every page that extends it.
 - Each page extends `layouts.app` and adds page assets with `@push('styles')` or `@push('scripts')`. Load public files with Laravel's `asset()` helper.
-- Home styles and interactions live in `public/css/home.css` and `public/js/home.js`.
+- Shared theme and Home styles live in `public/css/home.css`; Home interactions live in `public/js/home.js`.
 - Café images belong in `public/images/cafe/`; reference them as `asset('images/cafe/filename.jpg')` from Blade. Keep supplied image filenames intact when adding the other pages.
 - The shared coffee-bean background is fixed and cover-sized. Page content should use palette-colored panels so text stays readable over it.
 - Use the existing route paths `/`, `/about`, and `/contact` for the main navigation. Keep page-specific content in that page's Blade view.
