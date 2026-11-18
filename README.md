@@ -1,58 +1,83 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Muni-Muni Café
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A small café site for a Laravel group project. The shared Home page introduces the café, highlights three drinks, and gives visitors sample location and hours information.
 
-## About Laravel
+**Repository:** [Add the GitHub repository link](#repository-link)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Group and page assignments
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Member | Module | Branch |
+| --- | --- | --- |
+| Bigaran | Home page and shared layout | `dev-member1-Bigaran` |
+| Atillo | About page and route | `dev-memberN-Atillo` |
+| Baclayon | Contact page and route | `dev-memberN-Baclayon` |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Replace `N` in the two teammate branch names with the member numbers agreed by the group. The Home page links to `/about` and `/contact`; those routes are added with their respective modules.
 
-## Learning Laravel
+## Theme and content
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+The café uses a warm coffee palette:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Color | Hex | Use |
+| --- | --- | --- |
+| Espresso | `#3B2A20` | Main text and deep brown accents |
+| Caramel | `#C68F59` | Actions and highlights |
+| Mocha | `#E6D2B3` | Soft details and decorative line art |
+| Dark roast | `#1A120E` | Dark theme surfaces |
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+Display headings use a local serif stack; body text uses a local sans serif stack. The Home page supports dark and light themes, and remembers the selected theme in the browser. Cards and controls use theme-aware colors for readable contrast.
 
-## Agentic Development
+The sample café location is **Ampayon, Butuan City**. The sample hours are **7:00 AM–9:00 PM daily**. These are fictional project details.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Set up and run
+
+Requirements: PHP 8.3 or newer, Composer, Node.js with npm, and the PHP SQLite extension.
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+npm install
+npm run build
+php artisan serve
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Open the local URL printed by `php artisan serve` (usually `http://127.0.0.1:8000`). For live frontend asset rebuilding, use a second terminal and run `npm run dev` instead of `npm run build`.
 
-## Contributing
+## Shared layout and assets
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- `resources/views/layouts/app.blade.php` owns the wordmark, floating navigation, theme control, decorative coffee doodles, footer, and Blade content/style/script stacks. It loads the shared theme stylesheet for every page that extends it.
+- Each page extends `layouts.app` and adds page assets with `@push('styles')` or `@push('scripts')`. Load public files with Laravel's `asset()` helper.
+- Shared theme and Home styles live in `public/css/home.css`; Home interactions live in `public/js/home.js`.
+- Café images belong in `public/images/cafe/`; reference them as `asset('images/cafe/filename.jpg')` from Blade. Keep supplied image filenames intact when adding the other pages.
+- The shared coffee-bean background is fixed and cover-sized. Page content should use palette-colored panels so text stays readable over it.
+- Use the existing route paths `/`, `/about`, and `/contact` for the main navigation. Keep page-specific content in that page's Blade view.
 
-## Code of Conduct
+## Git and pull request workflow
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. Start from an up-to-date `main`: `git checkout main` then `git pull origin main`.
+2. Create or switch to your assigned branch, for example `git checkout -b dev-member1-Bigaran`.
+3. Commit one coherent project step at a time with a short, descriptive message, such as `Add Home drink carousel`.
+4. Push your branch with `git push -u origin <your-branch>`.
+5. Open a pull request from your branch into `main`, describe the page and assets changed, and include screenshots. Ask a teammate to review before merging.
+6. After a merge, update local `main` before starting the next task. Avoid committing generated files, `.env`, or local database contents.
 
-## Security Vulnerabilities
+## Repository and screenshots
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<a id="repository-link"></a>
 
-## License
+### Repository link
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Add the group repository URL here: **[Repository link](#repository-link)**
+
+### Page screenshots
+
+Save review screenshots under `docs/screenshots/` and link them here as the pages are completed.
+
+| Page / viewport | Screenshot |
+| --- | --- |
+| Home — desktop | `docs/screenshots/home-desktop.png` |
+| Home — mobile | `docs/screenshots/home-mobile.png` |
+| About | `docs/screenshots/about-page.png` |
+| Contact | `docs/screenshots/contact-page.png` |
