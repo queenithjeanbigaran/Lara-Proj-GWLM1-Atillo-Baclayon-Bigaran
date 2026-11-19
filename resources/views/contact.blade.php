@@ -45,7 +45,7 @@
                     <div class="detail-icon" style="width: 2.2rem; height: 2.2rem; font-size: 1rem;">🕒</div>
                     <div>
                         <p class="detail-label">Hours</p>
-                        <p class="detail-value">Every Day · 7:00 AM – 9:30 PM</p>
+                        <p class="detail-value">Every Day · 7:00 AM – 9:00 PM</p>
                     </div>
                 </div>
                 <div class="visit-detail">
