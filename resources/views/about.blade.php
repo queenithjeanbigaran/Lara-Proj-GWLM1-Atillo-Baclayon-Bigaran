@@ -1,126 +1,40 @@
-$aboutView = @'
-@extends('layouts.app')
-
 @section('title', 'About')
 
 @push('styles')
-<style>
-    .about-page {
-        display: grid;
-        gap: 1.75rem;
-    }
-
-    .about-hero {
-        padding: clamp(1.75rem, 4vw, 2.75rem);
-        border-radius: 24px;
-        background: var(--panel);
-        border: 1px solid var(--line);
-        box-shadow: var(--shadow);
-    }
-
-    .about-hero h1 {
-        font-family: var(--font-display);
-        font-size: clamp(2rem, 4.2vw, 3rem);
-        line-height: 1.12;
-        margin: 0.4rem 0 0.85rem;
-    }
-
-    .about-hero h1 span {
-        color: var(--accent);
-        font-style: italic;
-    }
-
-    .about-lead {
-        margin: 0;
-        max-width: 64ch;
-        color: var(--muted-text);
-        font-size: 1.05rem;
-    }
-
-    .about-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 1.25rem;
-    }
-
-    .about-card {
-        padding: 1.5rem;
-        border-radius: 20px;
-        background: var(--panel-soft);
-        border: 1px solid var(--line);
-        box-shadow: var(--shadow);
-    }
-
-    .about-card h2 {
-        font-family: var(--font-display);
-        font-size: 1.35rem;
-        margin: 0.35rem 0 0.65rem;
-    }
-
-    .about-card p {
-        margin: 0 0 0.75rem;
-        color: var(--muted-text);
-    }
-
-    .about-card p:last-child {
-        margin-bottom: 0;
-    }
-
-    .about-list {
-        list-style: none;
-        padding: 0;
-        margin: 0.75rem 0 0;
-        display: grid;
-        gap: 0.5rem;
-    }
-
-    .about-list li {
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
-        padding-bottom: 0.45rem;
-        border-bottom: 1px solid var(--line);
-    }
-
-    .about-list li:last-child {
-        border-bottom: 0;
-        padding-bottom: 0;
-    }
-
-    .about-price {
-        color: var(--accent);
-        font-weight: 600;
-    }
-
-    .about-footer-cta {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        padding: 1.35rem 1.5rem;
-        border-radius: 20px;
-        background: var(--panel-raised);
-        border: 1px solid var(--line);
-    }
-
-    .about-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.9rem;
-        align-items: center;
-    }
-</style>
+    <link rel="stylesheet" href="{{ asset('css/about.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/about-photos.css') }}">
 @endpush
 
 @section('content')
 <div class="about-page">
+    <figure class="about-editorial-quote" aria-label="Featured reflection quote">
+        <div class="about-quote-content">
+            <p class="about-quote-tag">Muni-Muni Reflection</p>
+            <blockquote>
+                <span class="about-quote-accent">Take the long way,</span>
+                <span class="about-quote-main">keep the warmth.</span>
+            </blockquote>
+            <span class="about-quote-divider" aria-hidden="true"></span>
+            <figcaption class="about-quote-sub">
+                Quiet tables, familiar voices, and unhurried cups made for lingering in Ampayon.
+            </figcaption>
+        </div>
+
+        <div class="about-brew-badge" aria-hidden="true">
+            <span class="about-brew-badge-text">
+                <span>Good</span>
+                <span>Things</span>
+                <span>Brew</span>
+            </span>
+        </div>
+    </figure>
+
     <section class="about-hero" aria-labelledby="about-hero-title">
         <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> Our story &amp; quiet rhythm</p>
         <h1 id="about-hero-title">A space for <span>muni-muni</span> moments.</h1>
         <p class="about-lead">
             At Muni-Muni Caf&eacute;, we believe good coffee works best when you don&rsquo;t have to rush through it.
-            Inspired by slowing down to reflect, breathe, and gather your thoughts in Ampayon, our café is a warm
+            Inspired by slowing down to reflect, breathe, and gather your thoughts in Ampayon, our Caf&eacute; is a warm
             corner for unhurried mornings, study breaks, and genuine conversation.
         </p>
     </section>
@@ -131,7 +45,7 @@ $aboutView = @'
             <h2>Rooted in reflection</h2>
             <p>
                 Days move fast between classes, deadlines, and everyday errands. Muni-Muni Caf&eacute; gives you room
-                to pause—whether you&rsquo;re reviewing notes, catching up with friends, or taking a quiet breather.
+                to pause whether you&rsquo;re reviewing notes, catching up with friends, or taking a quiet breather.
             </p>
         </article>
 
@@ -153,12 +67,13 @@ $aboutView = @'
             <h2>Drop in when you need a pause</h2>
             <p><strong>Neighborhood:</strong> Ampayon, Butuan City</p>
             <p><strong>Hours:</strong> Daily, 8:00 AM &ndash; 9:00 PM</p>
-            <p><strong>Team:</strong> Crafted by Atillo &middot; Baclayon &middot; Bigaran</p>
         </article>
     </section>
 
+    @include('partials.about-photos')
+
     <section class="about-footer-cta" aria-label="Continue exploring">
-        <p>Ready to head back or reach out to the café?</p>
+        <p>Ready to head back or reach out to the Caf&eacute;?</p>
         <div class="about-links">
             <a class="button button--primary" href="/">Back to Home</a>
             <a class="text-link" href="/contact">Contact us <span aria-hidden="true">&rarr;</span></a>
@@ -166,6 +81,35 @@ $aboutView = @'
     </section>
 </div>
 @endsection
-'@
 
-[System.IO.File]::WriteAllText("$PWD\resources\views\about.blade.php", $aboutView, [System.Text.UTF8Encoding]::new($false))
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var toggle = document.querySelector('.theme-toggle');
+    if (!toggle) return;
+
+    var label = toggle.querySelector('.theme-toggle-label');
+    var root = document.documentElement;
+
+    function syncButton() {
+        var isLight = root.dataset.theme === 'light';
+        toggle.setAttribute('aria-pressed', String(isLight));
+        toggle.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
+        if (label) {
+            label.textContent = isLight ? 'Dark' : 'Light';
+        }
+    }
+
+    syncButton();
+
+    toggle.addEventListener('click', function () {
+        var nextTheme = root.dataset.theme === 'light' ? 'dark' : 'light';
+        root.dataset.theme = nextTheme;
+        try {
+            localStorage.setItem('muni-muni-theme', nextTheme);
+        } catch (err) {}
+        syncButton();
+    });
+});
+</script>
+@endpush
