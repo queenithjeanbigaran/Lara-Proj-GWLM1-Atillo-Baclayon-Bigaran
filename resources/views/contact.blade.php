@@ -102,31 +102,106 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    // 1. Theme Toggle Logic (Existing)
     var toggle = document.querySelector('.theme-toggle');
-    if (!toggle) return;
+    if (toggle) {
+        var label = toggle.querySelector('.theme-toggle-label');
+        var root = document.documentElement;
 
-    var label = toggle.querySelector('.theme-toggle-label');
-    var root = document.documentElement;
-
-    function syncButton() {
-        var isLight = root.dataset.theme === 'light';
-        toggle.setAttribute('aria-pressed', String(isLight));
-        toggle.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
-        if (label) {
-            label.textContent = isLight ? 'Dark' : 'Light';
+        function syncButton() {
+            var isLight = root.dataset.theme === 'light';
+            toggle.setAttribute('aria-pressed', String(isLight));
+            toggle.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
+            if (label) {
+                label.textContent = isLight ? 'Dark' : 'Light';
+            }
         }
+
+        syncButton();
+
+        toggle.addEventListener('click', function () {
+            var nextTheme = root.dataset.theme === 'light' ? 'dark' : 'light';
+            root.dataset.theme = nextTheme;
+            try {
+                localStorage.setItem('muni-muni-theme', nextTheme);
+            } catch (err) {}
+            syncButton();
+        });
     }
 
-    syncButton();
+    // 2. Contact Form Validation Logic (Per-field check)
+    var contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-    toggle.addEventListener('click', function () {
-        var nextTheme = root.dataset.theme === 'light' ? 'dark' : 'light';
-        root.dataset.theme = nextTheme;
-        try {
-            localStorage.setItem('muni-muni-theme', nextTheme);
-        } catch (err) {}
-        syncButton();
-    });
+            // Kunin ang inputs
+            var nameInput = document.getElementById('name');
+            var emailInput = document.getElementById('email');
+            var subjectInput = document.getElementById('subject');
+            var messageInput = document.getElementById('message');
+
+            // Kunin ang error & success containers
+            var nameError = document.getElementById('nameError');
+            var emailError = document.getElementById('emailError');
+            var subjectError = document.getElementById('subjectError');
+            var messageError = document.getElementById('messageError');
+            var formSuccess = document.getElementById('formSuccess');
+
+            // I-reset muna ang lahat ng errors at success message
+            nameError.textContent = '';
+            emailError.textContent = '';
+            subjectError.textContent = '';
+            messageError.textContent = '';
+            formSuccess.style.display = 'none';
+
+            var isValid = true;
+
+            // 1. Validate Name (Kung dito lang may mali, dito lang din lalabas ang error)
+            if (!nameInput.value.trim()) {
+                nameError.textContent = 'Please enter your name.';
+                nameError.style.color = '#e63946';
+                isValid = false;
+            }
+
+            // 2. Validate Email
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailInput.value.trim()) {
+                emailError.textContent = 'Please enter your email address.';
+                emailError.style.color = '#e63946';
+                isValid = false;
+            } else if (!emailRegex.test(emailInput.value.trim())) {
+                emailError.textContent = 'Please enter a valid email address.';
+                emailError.style.color = '#e63946';
+                isValid = false;
+            }
+
+            // 3. Validate Subject
+            if (!subjectInput.value.trim()) {
+                subjectError.textContent = 'Please enter a subject.';
+                subjectError.style.color = '#e63946';
+                isValid = false;
+            }
+
+            // 4. Validate Message
+            if (!messageInput.value.trim()) {
+                messageError.textContent = 'Please write your message.';
+                messageError.style.color = '#e63946';
+                isValid = false;
+            }
+
+            // Kung lahat ay pasado at walang error
+            if (isValid) {
+                formSuccess.textContent = 'Thank you! Your message has been sent to Muni-Muni Café.';
+                formSuccess.style.display = 'block';
+                formSuccess.style.color = '#2a9d8f';
+                formSuccess.style.marginTop = '0.5rem';
+                formSuccess.style.fontSize = '0.85rem';
+                formSuccess.style.fontWeight = '600';
+                contactForm.reset();
+            }
+        });
+    }
 });
 </script>
 @endpush
