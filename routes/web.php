@@ -8,3 +8,8 @@ Route::get('/', function () {
 
 //Rubie - About
 Route::view('/about', 'about')->name('about');
+
+//Atillo - Contact Page
+Route::get('/contact', function () {
+    return view('contact');
+});
