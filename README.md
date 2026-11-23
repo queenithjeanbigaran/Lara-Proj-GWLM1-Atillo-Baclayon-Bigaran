@@ -63,21 +63,15 @@ Open the local URL printed by `php artisan serve` (usually `http://127.0.0.1:800
 5. Open a pull request from your branch into `main`, describe the page and assets changed, and include screenshots. Ask a teammate to review before merging.
 6. After a merge, update local `main` before starting the next task. Avoid committing generated files, `.env`, or local database contents.
 
-## Repository and screenshots
-
-<a id="repository-link"></a>
-
-### Repository link
-
-Add the group repository URL here: **[Repository link](#repository-link)**
-
-### Page screenshots
+## Page screenshots
 
 Save review screenshots under `docs/screenshots/` and link them here as the pages are completed.
 
-| Page / viewport | Screenshot |
-| --- | --- |
-| Home — desktop | `docs/screenshots/home-desktop.png` |
-| Home — mobile | `docs/screenshots/home-mobile.png` |
-| About | `docs/screenshots/about-page.png` |
-| Contact | `docs/screenshots/contact-page.png` |
+### Home
+![home](docs/screenshots/home.png)
+
+### About
+![about](docs/screenshots/about.png)
+
+### Contact
+![contact](docs/screenshots/contact.png)
